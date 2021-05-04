@@ -1,0 +1,33 @@
+dist: xenial
+sudo: required
+
+language: python
+
+python:
+  - 3.6
+  - 3.7
+  - 3.8
+
+addons:
+  apt:
+    sources:
+    - sourceline: ppa:ubuntugis/ppa
+    packages:
+    - gdal-bin
+    - libgdal-dev
+    - libproj-dev
+    - spatialite-bin
+    - python3-dev
+    - libsqlite3-mod-spatialite
+    - postgis
+    - postgresql-11-postgis-2.5
+
+env:
+  - DJANGO_VERSION=3.2
+
+install:
+  - pip install pipenv
+  - CPLUS_INCLUDE_PATH=/usr/include/gdal C_INCLUDE_PATH=/usr/include/gdal CFLAGS=-I/usr/include/gdal pipenv install
+
+script:
+  - python manage.py test
