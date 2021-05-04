@@ -1,19 +1,24 @@
+services:
+  - postgresql
+
 language: python
+
 python:
   - "3.6"      # current default Python on Travis CI
   - "3.7"
   - "3.8"
-addons:
-  postgresql: "9.6"
-  apt:
-    packages:
-    - postgresql-9.6-postgis-2.3
-before_script:
-  - psql -U postgres -c "create extension postgis"
+
 install:
   - sudo apt-get install gdal-bin binutils libproj-dev libgdal-dev python-gdal
   - pip install pipenv
   - pipenv install
-# command to run tests
+
+
+before_script:
+  - psql -c 'create database travis_postgis;' -U postgres
+  - psql -c 'CREATE EXTENSION postgis;' -U postgres -d travis_postgis
+  - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d travis_postgis
+  - psql -f test_data.sql -U postgres -d travis_postgis
+
 script:
   - pytest
