@@ -19,6 +19,8 @@ addons:
     - spatialite-bin
     - python3-dev
     - libsqlite3-mod-spatialite
+    - postgis
+    - postgresql-11-postgis-2.5
 
 env:
   - DJANGO_VERSION=3.2
@@ -26,15 +28,6 @@ env:
 install:
   - pip install pipenv
   - CPLUS_INCLUDE_PATH=/usr/include/gdal C_INCLUDE_PATH=/usr/include/gdal CFLAGS=-I/usr/include/gdal pipenv install
-
-services:
-  - postgresql
-
-before_script:
-  - psql -c 'create database travis_postgis;' -U postgres
-  - psql -c 'CREATE EXTENSION postgis;' -U postgres -d travis_postgis
-  - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d travis_postgis
-  - psql -f test_data.sql -U postgres -d travis_postgis
 
 script:
   - python manage.py test
