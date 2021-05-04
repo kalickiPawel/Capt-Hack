@@ -5,6 +5,7 @@ python:
   - "3.8"
 # command to install dependencies
 install:
+  - sudo apt-get install gdal-bin
   - pip install pipenv
   - pipenv install
 # command to run tests
