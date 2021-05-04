@@ -10,6 +10,7 @@ django-environ = "*"
 requests = "*"
 pytest = "*"
 pytest-django = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
