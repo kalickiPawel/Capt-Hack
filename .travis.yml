@@ -19,7 +19,6 @@ addons:
     - spatialite-bin
     - python3-dev
     - libsqlite3-mod-spatialite
-    - postgis
 
 env:
   - DJANGO_VERSION=3.2
