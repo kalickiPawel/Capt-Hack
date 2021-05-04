@@ -25,6 +25,7 @@ env:
   - DJANGO_VERSION=3.2
 
 install:
+  - sudo service postgresql start
   - pip install pipenv
   - CPLUS_INCLUDE_PATH=/usr/include/gdal C_INCLUDE_PATH=/usr/include/gdal CFLAGS=-I/usr/include/gdal pipenv install
 
