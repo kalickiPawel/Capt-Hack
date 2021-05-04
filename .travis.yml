@@ -28,9 +28,8 @@ env:
   - DJANGO_VERSION=3.2
 
 install:
-  - CPLUS_INCLUDE_PATH=/usr/include/gdal C_INCLUDE_PATH=/usr/include/gdal CFLAGS=-I/usr/include/gdal pip install GDAL==2.2.4
   - pip install pipenv
-  - pipenv install
+  - CPLUS_INCLUDE_PATH=/usr/include/gdal C_INCLUDE_PATH=/usr/include/gdal CFLAGS=-I/usr/include/gdal pipenv install
 
 script:
   - python manage.py test
