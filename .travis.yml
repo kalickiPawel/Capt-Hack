@@ -25,15 +25,19 @@ env:
   - DJANGO_VERSION=3.2
 
 install:
+  - sudo apt-get update
+  - sudo apt-get install postgresql
   - sudo service postgresql start
   - pip install pipenv
   - CPLUS_INCLUDE_PATH=/usr/include/gdal C_INCLUDE_PATH=/usr/include/gdal CFLAGS=-I/usr/include/gdal pipenv install
 
 before_script:
-   - psql -c 'create database travis_postgis;' -U postgres
-   - psql -c 'CREATE EXTENSION postgis;' -U postgres -d travis_postgis
-   - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d travis_postgis
-   - psql -f test_data.sql -U postgres -d travis_postgis
+  - sudo su postgres
+  - psql -d postgres -U postgres
+  - psql -c 'create database travis_postgis;' -U postgres
+  - psql -c 'CREATE EXTENSION postgis;' -U postgres -d travis_postgis
+  - psql -c 'CREATE EXTENSION postgis_topology;' -U postgres -d travis_postgis
+  - psql -f test_data.sql -U postgres -d travis_postgis
 
 script:
   - python manage.py test
