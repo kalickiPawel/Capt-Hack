@@ -4,6 +4,8 @@ python:
   - "3.7"
   - "3.8"
 # command to install dependencies
+virtualenv:
+  system_site_packages: true
 install:
   - sudo apt-get install gdal-bin binutils libproj-dev libgdal-dev python-gdal
   - pip install pipenv
