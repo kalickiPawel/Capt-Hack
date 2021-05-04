@@ -7,7 +7,7 @@ python:
 
 install:
   - sudo apt-get update
-  - sudo apt-get install build-essential binutils libproj-dev libgdal-dev python-gdal
+  - sudo apt-get install binutils gdal-bin python-gdal
   - sudo apt-get install postgresql-10-postgis-2.4
   - pip install pipenv
   - pipenv install
