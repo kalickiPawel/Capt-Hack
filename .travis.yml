@@ -33,4 +33,4 @@ install:
   - pipenv install
 
 script:
-  - pytest
+  - python manage.py test
